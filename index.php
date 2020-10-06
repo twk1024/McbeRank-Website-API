@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="utf-8">
-    <title>API Example for Website</title>
-</head>
-<body>
-
+<!--
+MCBE Rank API를 php를 통해 웹사이트에서 사용할 수 있는 예제입니다.
+-->
 
 <?php
-$url = 'http://be.diamc.kr:3500/api/servers/diamc.kr:19132'; 
-
-$rank = $url['rank'];
-
-
-echo ($rank);
+  $data_str1 = file_get_contents('http://diamc.kr:3500/api/servers/diamc.kr:19132');
+  $json1 = json_decode($data_str1, true);
+  if ($json1['online'] != null) {
+    echo '현재 동접: '. $json1['numplayers']. "<br>";
+    echo '서버 순위: '. $json1['rank']. '위' . "<br><br>";
+    echo 'MCBE Rank API';
+  } else {
+    echo 'API 값을 불러오지 못했습니다';
+  }
+  
 ?>
-
-<p>Website Example<br>
-Your Server's Rank is <?php ("$rank") ?></p>
-</body>
